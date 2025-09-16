@@ -1,0 +1,25 @@
+# Cursor Rules for ai chatbot + code review agent
+
+# 1) Keep it simple and streaming-first
+- Prefer small, composable TypeScript functions.
+- Use streaming APIs (`streamText`) for both CLI and server flows.
+- Avoid adding dependencies unless clearly necessary.
+
+# 2) Single-responsibility files
+- `index.ts`: code review agent entry.
+- `chatbot.ts`: chatbot CLI logic.
+- `server.ts`: optional minimal web server for the chatbot.
+- `prompts.ts`: centralized prompt strings.
+- `tools.ts`: AI tools for code review; do not expose tools to the general chatbot.
+
+# 3) Security & keys
+- Never expose API keys in client code.
+- Keep server endpoints minimal, validate inputs, and avoid file-system access in chatbot.
+
+# 4) Style & commits
+- Use Conventional Commits (e.g., `feat:`, `fix:`, `docs:`).
+- Prefer clear naming, short functions, and comments only when clarifying intent.
+
+# 5) Refactor guidance
+- Eliminate duplication across `index.ts` and `chatbot.ts` by extracting shared config.
+- Keep prompts and model config DRY; use `prompts.ts`.
