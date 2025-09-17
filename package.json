@@ -14,5 +14,9 @@
     "ai": "^5.0.44",
     "simple-git": "^3.28.0",
     "zod": "^4.1.8"
+  },
+  "scripts": {
+    "chat": "bun run chatbot.ts",
+    "dev": "bun run server.ts"
   }
 }

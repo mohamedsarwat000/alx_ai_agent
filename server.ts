@@ -51,7 +51,7 @@ Bun.serve({
         if (!contentType.includes("application/json")) {
           return json({ status: 400 }, { error: "Expected application/json" });
         }
-        const body = await req.json().catch(() => ({}));
+        const body = (await req.json().catch(() => ({}))) as { message?: unknown };
         const message = typeof body.message === "string" ? body.message.trim() : "";
         if (!message) {
           return json({ status: 400 }, { error: "Missing 'message' in body" });
