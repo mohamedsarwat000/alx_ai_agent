@@ -6,8 +6,48 @@ This project is a small, Bun + TypeScript codebase showcasing two AI-powered cap
 - Simple AI Chatbot with:
   - CLI interface (streaming to stdout)
   - Minimal Web UI served via `Bun.serve()`
+  - Dashboard sidebar for quick navigation (New Chat, Recent Chats, Settings, About)
 
 The stack uses `ai` and `@ai-sdk/google` to stream responses from a Google model.
+
+---
+
+## 🔖 Project Title & Description
+
+- **Title:** ALX AI Agent – Code Review Agent + Simple Chatbot
+- **What we’re building:** A lightweight AI toolkit with (1) a streaming code review agent that inspects recent file diffs and (2) a simple AI chatbot available via CLI and a minimalist web UI.
+- **Who it’s for:** Learners and developers who want a compact reference for adding AI features—code review automation and conversational assistance—into a Bun + TypeScript project.
+- **Why it matters:** Demonstrates a practical, AI-enhanced dev workflow; shows how to structure prompts, stream responses, and design small, testable modules. It’s easy to extend for coursework or real projects.
+
+## 🛠️ Tech Stack
+
+- **Languages:** TypeScript
+- **Runtime:** Bun
+- **AI SDKs:** `ai`, `@ai-sdk/google`
+- **Utilities:** `simple-git` for diff summaries, `zod` for input validation (tools)
+- **Build/Config:** `tsconfig.json`
+- **UI:** Static HTML/CSS served by `Bun.serve()`
+
+## 🧠 AI Integration Strategy
+
+- **Code generation:**
+  - Use IDE chat to scaffold new modules (e.g., `chatbot.ts`, `server.ts`).
+  - Follow `.cursorrules` to enforce small, streaming-first functions and DRY prompts.
+  - Rely on `PLAN.md` for folder structure and function signatures during scaffolding.
+
+- **Testing:**
+  - Use AI to draft smoke tests and request-targeted prompts like: “Write a smoke test for `server.ts` POST /chat, validating JSON input and streaming output handling.”
+  - For unit tests, prompt AI to generate test tables for edge cases (empty input, non-JSON, large messages).
+
+- **Documentation:**
+  - Generate docstrings and inline comments via AI prompts referencing `#file:server.ts` or `@code chatbot.ts` to maintain context.
+  - Keep README up to date by prompting AI with the latest file tree and plan.
+
+- **Context-aware techniques:**
+  - Feed AI the file tree, diffs (`tools.ts` + `simple-git`), and specific files using in-editor context commands (e.g., `@code`, `#file`, `@thread`).
+  - For reviews, run the code review agent with a directory-focused prompt to critique changes.
+
+Push this README.md at the repo root (you can verify on GitHub) to satisfy the course deliverable.
 
 ## Features
 
@@ -15,6 +55,7 @@ The stack uses `ai` and `@ai-sdk/google` to stream responses from a Google model
 - Git diff tool in `tools.ts` exposed as `getFileChangesInDirectoryTool`.
 - Chatbot CLI in `chatbot.ts` using `CHATBOT_SYSTEM_PROMPT`.
 - Minimal web server in `server.ts` and basic UI in `public/index.html`.
+- Dashboard sidebar in the chat UI for quick navigation (New Chat, Recent Chats, Settings, About).
 - Project guidance via `.cursorrules` and the full development plan in `PLAN.md`.
 
 ## Requirements
@@ -87,6 +128,14 @@ bun run dev
 
 Type a message and you’ll see the response stream in the UI.
 
+#### Dashboard Sidebar
+- The web UI includes a left sidebar “Dashboard” with quick actions:
+  - New Chat
+  - Recent Chats
+  - Settings
+  - About
+- You can extend these to real functionality (persist conversations, store settings) as follow-ups.
+
 ## Project Structure
 
 ```
@@ -94,7 +143,7 @@ Type a message and you’ll see the response stream in the UI.
 ├─ chatbot.ts          # CLI Chatbot entry (streams assistant output)
 ├─ server.ts           # Minimal Bun server + /chat endpoint
 ├─ public/
-│  └─ index.html       # Simple chat UI
+│  └─ index.html       # Simple chat UI with a dashboard sidebar
 ├─ prompts.ts          # SYSTEM_PROMPT and CHATBOT_SYSTEM_PROMPT
 ├─ tools.ts            # getFileChangesInDirectoryTool (git diff)
 ├─ PLAN.md             # AI dev workflow plan for this feature
