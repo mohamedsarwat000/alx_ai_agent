@@ -17,6 +17,8 @@
   },
   "scripts": {
     "chat": "bun run chatbot.ts",
-    "dev": "bun run server.ts"
+    "dev": "bun run server.ts",
+    "test": "bun test",
+    "review": "bun run index.ts"
   }
 }

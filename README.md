@@ -51,11 +51,13 @@ Push this README.md at the repo root (you can verify on GitHub) to satisfy the c
 
 ## Features
 
-- Code review agent in `index.ts` with `SYSTEM_PROMPT` from `prompts.ts`.
-- Git diff tool in `tools.ts` exposed as `getFileChangesInDirectoryTool`.
-- Chatbot CLI in `chatbot.ts` using `CHATBOT_SYSTEM_PROMPT`.
-- Minimal web server in `server.ts` and basic UI in `public/index.html`.
-- Dashboard sidebar in the chat UI for quick navigation (New Chat, Recent Chats, Settings, About).
+- **Code Review Agent**: Analyzes git diffs with detailed feedback (`index.ts`)
+- **CLI Chatbot**: Interactive terminal-based AI assistant (`chatbot.ts`)
+- **Web UI**: Modern streaming chat interface with dashboard (`server.ts` + `public/index.html`)
+- **Comprehensive Testing**: Unit tests for core functionality (`tests/`)
+- **Enhanced Error Handling**: Robust logging and input validation
+- **Complete Documentation**: Usage guides, API docs, and development reflection
+- **Environment Configuration**: Flexible setup with `.env` support
 - Project guidance via `.cursorrules` and the full development plan in `PLAN.md`.
 
 ## Requirements

@@ -56,6 +56,13 @@
       const input = document.getElementById('input');
       const send = document.getElementById('send');
       const newChat = document.getElementById('new-chat');
+      const recentChats = document.getElementById('recent-chats');
+      const settings = document.getElementById('settings');
+      const about = document.getElementById('about');
+
+      // Simple chat history storage (in memory)
+      let chatHistory = [];
+      let currentChatId = null;
 
       function addMessage(text, role) {
         const el = document.createElement('div');
@@ -63,14 +70,54 @@
         el.textContent = text;
         messages.appendChild(el);
         messages.scrollTop = messages.scrollHeight;
+        
+        // Store in current chat history
+        if (currentChatId) {
+          const chat = chatHistory.find(c => c.id === currentChatId);
+          if (chat) {
+            chat.messages.push({ text, role, timestamp: new Date().toISOString() });
+          }
+        }
+        
         return el;
       }
 
-      // Sidebar actions (minimal placeholders)
-      newChat?.addEventListener('click', () => {
+      function startNewChat() {
+        currentChatId = Date.now().toString();
+        chatHistory.push({
+          id: currentChatId,
+          title: `Chat ${chatHistory.length + 1}`,
+          messages: [],
+          createdAt: new Date().toISOString()
+        });
         messages.innerHTML = '';
         input.focus();
+      }
+
+      // Sidebar actions
+      newChat?.addEventListener('click', startNewChat);
+      
+      recentChats?.addEventListener('click', () => {
+        if (chatHistory.length === 0) {
+          alert('No recent chats available');
+          return;
+        }
+        const chatList = chatHistory.map(chat => 
+          `${chat.title} (${new Date(chat.createdAt).toLocaleDateString()})`
+        ).join('\n');
+        alert(`Recent Chats:\n\n${chatList}\n\nNote: This is a demo - chat persistence not implemented.`);
       });
+
+      settings?.addEventListener('click', () => {
+        alert('Settings:\n\n• Model: Gemini 2.5 Flash\n• Streaming: Enabled\n• Theme: Auto\n\nNote: This is a demo - settings not configurable.');
+      });
+
+      about?.addEventListener('click', () => {
+        alert('AI Chatbot Demo\n\nBuilt with:\n• Bun + TypeScript\n• AI SDK + Google Gemini\n• Streaming responses\n• Minimal UI\n\nThis is a learning project showcasing AI integration patterns.');
+      });
+
+      // Initialize with first chat
+      startNewChat();
 
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
